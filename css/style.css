@@ -162,17 +162,28 @@ body {
     align-items: center;
     text-decoration: none;
     transition: var(--transition);
+    gap: 10px;
 }
 
 .logo:hover {
     transform: scale(1.05);
 }
 
-.logo img {
+.logo img,
+.logo-img {
+    width: 50px;
     height: 50px;
-    margin-right: 10px;
     border-radius: 50%;
     box-shadow: var(--shadow);
+    object-fit: cover;
+    border: 2px solid var(--primary-yellow);
+    transition: var(--transition);
+}
+
+.logo:hover img,
+.logo:hover .logo-img {
+    border-color: var(--primary-green);
+    box-shadow: var(--shadow-hover);
 }
 
 .logo-text {
@@ -313,12 +324,14 @@ body {
 }
 
 .hero-logo {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-lg);
     animation: float 3s ease-in-out infinite;
+    object-fit: cover;
+    border: 4px solid white;
 }
 
 .hero h1 {
