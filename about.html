@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BakedInAki</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">
+                    <span class="baked">Baked</span><span class="in">in</span><span class="aki">Aki</span>
+                </span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="track.html">Track Order</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="cart-icon" title="View Cart">
+                🛒
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section style="background: linear-gradient(135deg, var(--primary-yellow) 0%, #FFA500 100%); padding: 3rem 2rem; text-align: center;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏠 About Us</h1>
+        <p style="color: #333;">The story behind BakedInAki</p>
+    </section>
+
+    <!-- About Content -->
+    <section class="section">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Welcome to <strong>BakedInAki</strong> – your neighborhood bakery in the heart of Dasmariñas, Cavite! What started as a small home-based baking venture has grown into a beloved local bakery serving the community with fresh, delicious baked goods.</p>
+                <p>Our name "BakedInAki" comes from our founder's nickname and represents our commitment to personal, handcrafted quality in every product we make. We believe that great bread and pastries should be accessible to everyone.</p>
+                <p>Every day, we wake up early to prepare fresh batches of your favorite breads, pastries, and cakes. We use only quality ingredients and traditional recipes passed down through generations, combined with modern techniques to bring you the best baked goods in Dasmariñas.</p>
+            </div>
+            <div class="about-image">
+                <div style="font-size: 10rem; text-align: center;">👨‍🍳</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section style="background: white; padding: 4rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">Our Values</h2>
+            <p class="section-subtitle">What we stand for</p>
+            <div class="product-grid">
+                <div class="product-card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🌾</div>
+                    <h3 style="margin-bottom: 0.5rem;">Quality Ingredients</h3>
+                    <p style="color: #666;">We source the finest ingredients to ensure every bite is delicious and wholesome.</p>
+                </div>
+                <div class="product-card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+                    <h3 style="margin-bottom: 0.5rem;">Community First</h3>
+                    <p style="color: #666;">We're proud to serve our neighbors in Dasmariñas and be part of this vibrant community.</p>
+                </div>
+                <div class="product-card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💪</div>
+                    <h3 style="margin-bottom: 0.5rem;">Affordable Excellence</h3>
+                    <p style="color: #666;">Great taste shouldn't be expensive. We offer premium quality at prices everyone can afford.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="order-section">
+                <h3>🎯 Our Mission</h3>
+                <p style="color: #666; line-height: 1.8;">To bring joy to every household in Dasmariñas through freshly baked goods made with love, quality ingredients, and traditional Filipino recipes that remind you of home.</p>
+            </div>
+            <div class="order-section">
+                <h3>🌟 Our Vision</h3>
+                <p style="color: #666; line-height: 1.8;">To become the most trusted and beloved bakery in Cavite, known for our consistency, quality, and genuine care for our customers and community.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background: linear-gradient(135deg, #32CD32 0%, #228B22 100%); padding: 4rem 2rem; text-align: center; color: white;">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Come Visit Us!</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">We'd love to serve you. Drop by our bakery or order online!</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="contact.html" class="btn" style="background: white; color: #32CD32;">Find Our Location</a>
+            <a href="menu.html" class="btn" style="background: transparent; border: 2px solid white; color: white;">View Menu</a>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>🛒 Your Cart</h3>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="cart-total-amount">₱0.00</span>
+            </div>
+            <a href="order.html" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>🍞 BakedInAki</h4>
+                <p>Malakasang Bakery Sa Buong Dasmariñas</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="menu.html">Menu</a>
+                <a href="order.html">Order Online</a>
+                <a href="track.html">Track Order</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>📍 Dasmariñas, Cavite</p>
+                <p>📞 0917-123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Store Hours</h4>
+                <p>Mon-Sat: 6AM - 8PM</p>
+                <p>Sunday: 7AM - 6PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BakedInAki. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="data/products.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - BakedInAki Admin</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2><span class="baked">Baked</span><span class="in">in</span><span class="aki">Aki</span></h2>
+                <small>Admin Panel</small>
+            </div>
+            <nav>
+                <ul class="admin-nav">
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="orders.html">
+                            <span class="nav-icon">📦</span>
+                            Orders
+                        </a>
+                    </li>
+                    <li>
+                        <a href="products.html" class="active">
+                            <span class="nav-icon">🍞</span>
+                            Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../index.html" target="_blank">
+                            <span class="nav-icon">🌐</span>
+                            View Website
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <h1>🍞 Products Management</h1>
+                <button class="btn-add" onclick="openAddModal()">+ Add Product</button>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="admin-card" style="padding: 1rem 1.5rem; margin-bottom: 1rem;">
+                <div class="filter-bar">
+                    <select class="filter-select" id="category-filter" onchange="filterProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="breads">🍞 Breads</option>
+                        <option value="cakes">🎂 Cakes</option>
+                        <option value="pastries">🥧 Pastries</option>
+                        <option value="cookies">🍪 Cookies & Snacks</option>
+                    </select>
+                    <input type="text" class="search-input" id="search-input" placeholder="Search products..." onkeyup="filterProducts()">
+                </div>
+            </div>
+
+            <!-- Products Table -->
+            <div class="admin-card">
+                <div class="card-header">
+                    <h2>All Products</h2>
+                    <span id="product-count">0 products</span>
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table">
+                        <!-- Products loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Add New Product</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="product-form" class="product-form">
+                    <input type="hidden" id="product-id">
+                    
+                    <div class="form-group">
+                        <label for="product-name">Product Name *</label>
+                        <input type="text" id="product-name" required placeholder="e.g., Pandesal">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-category">Category *</label>
+                            <select id="product-category" required>
+                                <option value="">Select category</option>
+                                <option value="breads">🍞 Breads</option>
+                                <option value="cakes">🎂 Cakes</option>
+                                <option value="pastries">🥧 Pastries</option>
+                                <option value="cookies">🍪 Cookies & Snacks</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-price">Price (₱) *</label>
+                            <input type="number" id="product-price" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-description">Description</label>
+                        <textarea id="product-description" rows="3" placeholder="Describe the product..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-image">Emoji Icon</label>
+                            <input type="text" id="product-image" placeholder="🍞" maxlength="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-available">Availability</label>
+                            <select id="product-available">
+                                <option value="true">✅ Available</option>
+                                <option value="false">❌ Unavailable</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn btn-delete" onclick="closeModal()">Cancel</button>
+                <button class="btn-add" onclick="saveProduct()">Save Product</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="delete-modal">
+        <div class="modal" style="max-width: 400px; text-align: center;">
+            <div class="modal-body" style="padding: 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                <h3>Delete Product?</h3>
+                <p style="color: #666; margin: 1rem 0;">Are you sure you want to delete "<span id="delete-product-name"></span>"? This action cannot be undone.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+                    <button class="action-btn btn-view" onclick="closeDeleteModal()">Cancel</button>
+                    <button class="action-btn btn-delete" onclick="confirmDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../data/products.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/admin/auth.js"></script>
+    <script src="../js/admin/products.js"></script>
+</body>
+</html>

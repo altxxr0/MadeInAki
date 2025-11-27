@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BakedInAki</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">
+                    <span class="baked">Baked</span><span class="in">in</span><span class="aki">Aki</span>
+                </span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="track.html">Track Order</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="cart-icon" title="View Cart">
+                🛒
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section style="background: linear-gradient(135deg, var(--primary-yellow) 0%, #FFA500 100%); padding: 3rem 2rem; text-align: center;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">📞 Contact Us</h1>
+        <p style="color: #333;">We'd love to hear from you!</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="contact-grid">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h2 style="margin-bottom: 2rem;">Get in Touch</h2>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Location</h4>
+                        <p style="color: #666;">Dasmariñas, Cavite, Philippines</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p style="color: #666;">0917-123-4567</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p style="color: #666;">bakedinaki@email.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Social Media</h4>
+                        <p style="color: #666;">@bakedinaki</p>
+                    </div>
+                </div>
+
+                <!-- Store Hours -->
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #eee;">
+                    <h3 style="margin-bottom: 1rem;">🕐 Store Hours</h3>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Monday - Saturday</span>
+                            <span style="font-weight: bold;">6:00 AM - 8:00 PM</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Sunday</span>
+                            <span style="font-weight: bold;">7:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map & Contact Form -->
+            <div>
+                <!-- Map Placeholder -->
+                <div class="map-container" style="margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">📍 Find Us</h3>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123529.3501!2d120.90!3d14.33!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d5280be840e7%3A0x4015f4f75b29520!2sDasmarinas%2C%20Cavite!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph"
+                        width="100%" 
+                        height="300" 
+                        style="border:0; border-radius: 10px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3>✉️ Send us a Message</h3>
+                    <form id="contact-form" onsubmit="submitContactForm(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name">Your Name *</label>
+                                <input type="text" id="contact-name" required placeholder="Juan Dela Cruz">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-phone">Phone Number</label>
+                                <input type="tel" id="contact-phone" placeholder="0917-123-4567">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address *</label>
+                            <input type="email" id="contact-email" required placeholder="juan@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <select id="contact-subject">
+                                <option value="general">General Inquiry</option>
+                                <option value="order">Order Question</option>
+                                <option value="feedback">Feedback / Suggestion</option>
+                                <option value="bulk">Bulk Order / Event Inquiry</option>
+                                <option value="partnership">Partnership / Business</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message *</label>
+                            <textarea id="contact-message" rows="5" required placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message 📤</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section style="background: linear-gradient(135deg, var(--primary-green) 0%, #228B22 100%); padding: 3rem 2rem; text-align: center; color: white;">
+        <h2 style="margin-bottom: 0.5rem;">Follow Us on Social Media!</h2>
+        <p style="opacity: 0.9; margin-bottom: 1.5rem;">Stay updated with our latest products and promos</p>
+        <div class="social-links" style="justify-content: center;">
+            <a href="https://facebook.com/bakedinaki" target="_blank" class="social-link" title="Facebook">📘</a>
+            <a href="https://instagram.com/bakedinaki" target="_blank" class="social-link" title="Instagram">📷</a>
+            <a href="https://tiktok.com/@bakedinaki" target="_blank" class="social-link" title="TikTok">🎵</a>
+            <a href="https://m.me/bakedinaki" target="_blank" class="social-link" title="Messenger">💬</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="background: white; padding: 4rem 2rem;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 class="section-title">❓ Frequently Asked Questions</h2>
+            <p class="section-subtitle">Quick answers to common questions</p>
+            
+            <div style="display: grid; gap: 1rem;">
+                <div class="order-section">
+                    <h4 style="color: #32CD32;">Do you deliver?</h4>
+                    <p style="color: #666;">Yes! We deliver within Dasmariñas, Cavite. Delivery fee is ₱50.</p>
+                </div>
+                <div class="order-section">
+                    <h4 style="color: #32CD32;">What payment methods do you accept?</h4>
+                    <p style="color: #666;">We accept Cash on Delivery/Pickup and GCash payments.</p>
+                </div>
+                <div class="order-section">
+                    <h4 style="color: #32CD32;">Can I order for special occasions?</h4>
+                    <p style="color: #666;">Absolutely! For bulk orders or custom cakes, please contact us at least 2-3 days in advance.</p>
+                </div>
+                <div class="order-section">
+                    <h4 style="color: #32CD32;">How do I track my order?</h4>
+                    <p style="color: #666;">After placing your order, you'll receive an order number. Use it on our <a href="track.html">Track Order</a> page to check status.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>🛒 Your Cart</h3>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="cart-total-amount">₱0.00</span>
+            </div>
+            <a href="order.html" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>🍞 BakedInAki</h4>
+                <p>Malakasang Bakery Sa Buong Dasmariñas</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="menu.html">Menu</a>
+                <a href="order.html">Order Online</a>
+                <a href="track.html">Track Order</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>📍 Dasmariñas, Cavite</p>
+                <p>📞 0917-123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Store Hours</h4>
+                <p>Mon-Sat: 6AM - 8PM</p>
+                <p>Sunday: 7AM - 6PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BakedInAki. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="data/products.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Contact form handler
+        function submitContactForm(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Store message (in real app, this would go to a server)
+            const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
+            messages.push({
+                id: Date.now(),
+                name,
+                email,
+                subject,
+                message,
+                date: new Date().toISOString(),
+                read: false
+            });
+            localStorage.setItem('contact_messages', JSON.stringify(messages));
+            
+            showToast('✅ Thank you for your message, ' + name.split(' ')[0] + '! We\'ll get back to you within 24 hours.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

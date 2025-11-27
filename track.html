@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - BakedInAki</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">
+                    <span class="baked">Baked</span><span class="in">in</span><span class="aki">Aki</span>
+                </span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="track.html">Track Order</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="cart-icon" title="View Cart">
+                🛒
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section style="background: linear-gradient(135deg, var(--primary-yellow) 0%, #FFA500 100%); padding: 3rem 2rem; text-align: center;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">📦 Track Your Order</h1>
+        <p style="color: #333;">Enter your order number to check status</p>
+    </section>
+
+    <!-- Track Section -->
+    <section class="section">
+        <div class="track-container">
+            <!-- Track Form -->
+            <div class="track-form">
+                <h3 style="margin-bottom: 1rem;">Enter Order Number</h3>
+                <input type="text" id="order-id-input" placeholder="e.g., AKI-20231127-001">
+                <button class="btn btn-primary" onclick="trackOrder()" style="width: 100%;">Track Order</button>
+            </div>
+
+            <!-- Order Status -->
+            <div class="order-status" id="order-status">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3>Order <span id="display-order-id">AKI-20231127-001</span></h3>
+                    <span class="status-badge status-pending" id="status-badge">Pending</span>
+                </div>
+
+                <!-- Status Timeline -->
+                <div class="status-timeline" id="status-timeline">
+                    <div class="status-step" data-status="pending">
+                        <div class="status-icon">📝</div>
+                        <span>Pending</span>
+                    </div>
+                    <div class="status-step" data-status="preparing">
+                        <div class="status-icon">👨‍🍳</div>
+                        <span>Preparing</span>
+                    </div>
+                    <div class="status-step" data-status="ready">
+                        <div class="status-icon">✅</div>
+                        <span>Ready</span>
+                    </div>
+                    <div class="status-step" data-status="completed">
+                        <div class="status-icon">🎉</div>
+                        <span>Completed</span>
+                    </div>
+                </div>
+
+                <!-- Order Details -->
+                <div class="order-detail-section">
+                    <h4>Order Details</h4>
+                    <div id="order-details">
+                        <!-- Details loaded via JS -->
+                    </div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="order-detail-section">
+                    <h4>Items Ordered</h4>
+                    <div class="order-items-list" id="order-items-list">
+                        <!-- Items loaded via JS -->
+                    </div>
+                </div>
+
+                <!-- Totals -->
+                <div class="order-detail-section">
+                    <div class="detail-row">
+                        <span class="detail-label">Subtotal</span>
+                        <span class="detail-value" id="track-subtotal">₱0.00</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Delivery Fee</span>
+                        <span class="detail-value" id="track-delivery-fee">₱0.00</span>
+                    </div>
+                    <div class="detail-row" style="font-size: 1.2rem; font-weight: bold; padding-top: 0.5rem; border-top: 2px solid #32CD32;">
+                        <span>Total</span>
+                        <span id="track-total" style="color: #32CD32;">₱0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Not Found -->
+            <div id="order-not-found" style="display: none; text-align: center; padding: 2rem; background: #fff; border-radius: 15px; margin-top: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+                <h3>Order Not Found</h3>
+                <p style="color: #666;">Please check your order number and try again.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>🛒 Your Cart</h3>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="cart-total-amount">₱0.00</span>
+            </div>
+            <a href="order.html" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>🍞 BakedInAki</h4>
+                <p>Malakasang Bakery Sa Buong Dasmariñas</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="menu.html">Menu</a>
+                <a href="order.html">Order Online</a>
+                <a href="track.html">Track Order</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>📍 Dasmariñas, Cavite</p>
+                <p>📞 0917-123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Store Hours</h4>
+                <p>Mon-Sat: 6AM - 8PM</p>
+                <p>Sunday: 7AM - 6PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BakedInAki. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="data/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/track.js"></script>
+</body>
+</html>

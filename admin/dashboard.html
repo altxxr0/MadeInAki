@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BakedInAki Admin</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2><span class="baked">Baked</span><span class="in">in</span><span class="aki">Aki</span></h2>
+                <small>Admin Panel</small>
+            </div>
+            <nav>
+                <ul class="admin-nav">
+                    <li>
+                        <a href="dashboard.html" class="active">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="orders.html">
+                            <span class="nav-icon">📦</span>
+                            Orders
+                        </a>
+                    </li>
+                    <li>
+                        <a href="products.html">
+                            <span class="nav-icon">🍞</span>
+                            Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../index.html" target="_blank">
+                            <span class="nav-icon">🌐</span>
+                            View Website
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <h1>📊 Dashboard</h1>
+                <p style="color: #666;">Welcome back! Here's your bakery overview.</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card orders">
+                    <h3>Today's Orders</h3>
+                    <div class="stat-value" id="today-orders">0</div>
+                </div>
+                <div class="stat-card pending">
+                    <h3>Pending Orders</h3>
+                    <div class="stat-value" id="pending-orders">0</div>
+                </div>
+                <div class="stat-card revenue">
+                    <h3>Today's Revenue</h3>
+                    <div class="stat-value" id="today-revenue">₱0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Products</h3>
+                    <div class="stat-value" id="total-products">0</div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="admin-card">
+                <div class="card-header">
+                    <h2>📦 Recent Orders</h2>
+                    <a href="orders.html" class="btn-view">View All</a>
+                </div>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-orders">
+                        <!-- Orders loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="admin-card">
+                <div class="card-header">
+                    <h2>⚡ Quick Actions</h2>
+                </div>
+                <div style="padding: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="orders.html" class="btn-add">📦 Manage Orders</a>
+                    <a href="products.html" class="btn-add">🍞 Manage Products</a>
+                    <a href="../index.html" target="_blank" class="btn-add" style="background: #666;">🌐 View Website</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../data/products.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/admin/auth.js"></script>
+    <script>
+        // Protect page
+        if (!requireAuth()) {
+            // Will redirect to login
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboardStats();
+            loadRecentOrders();
+        });
+
+        function loadDashboardStats() {
+            const orders = Orders.getOrders();
+            const todayOrders = Orders.getTodayOrders();
+            const products = getProducts();
+            
+            // Today's orders
+            document.getElementById('today-orders').textContent = todayOrders.length;
+            
+            // Pending orders
+            const pendingOrders = orders.filter(o => o.status === 'pending' || o.status === 'preparing');
+            document.getElementById('pending-orders').textContent = pendingOrders.length;
+            
+            // Today's revenue
+            const todayRevenue = todayOrders
+                .filter(o => o.status !== 'cancelled')
+                .reduce((sum, o) => sum + o.total, 0);
+            document.getElementById('today-revenue').textContent = formatPrice(todayRevenue);
+            
+            // Total products
+            document.getElementById('total-products').textContent = products.length;
+        }
+
+        function loadRecentOrders() {
+            const orders = Orders.getOrders();
+            const recentOrders = orders.slice(-5).reverse(); // Last 5 orders
+            
+            const tbody = document.getElementById('recent-orders');
+            
+            if (recentOrders.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 2rem; color: #666;">
+                            No orders yet. Orders will appear here when customers place them.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = recentOrders.map(order => `
+                <tr>
+                    <td><strong>${order.id}</strong></td>
+                    <td>${order.customer.name}</td>
+                    <td>${order.items.length} item(s)</td>
+                    <td>${formatPrice(order.total)}</td>
+                    <td><span class="status-badge status-${order.status}">${formatStatusText(order.status)}</span></td>
+                    <td>${formatTime(order.createdAt)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function formatStatusText(status) {
+            const statusMap = {
+                'pending': 'Pending',
+                'preparing': 'Preparing',
+                'ready': 'Ready',
+                'completed': 'Completed',
+                'cancelled': 'Cancelled'
+            };
+            return statusMap[status] || status;
+        }
+
+        function formatTime(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' });
+        }
+    </script>
+</body>
+</html>
